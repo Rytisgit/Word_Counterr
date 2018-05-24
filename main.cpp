@@ -4,9 +4,9 @@
 #include <vector>
 #include <fstream>
 #include <iomanip>
+#include <algorithm>
 
 bool wordStarted = false;
-std::map<std::string,int> WordCounts;
 int wordLenght = 0;
 std::string currentWord {};
 
@@ -30,7 +30,8 @@ bool findWords(char currentChar) {
 
             if (wordStarted)
             {
-                currentWord += currentChar;
+
+                currentWord += (char)std::tolower(currentChar);
                 wordLenght++;
             }
         }
@@ -40,7 +41,7 @@ bool findWords(char currentChar) {
 void process(const std::string &line, int lineNumber, std::map<std::string, data> &WordCounts) {
     std::vector<int>temp;
     temp.push_back(lineNumber);
-    data first;
+    data first{};
     first.lines.insert(lineNumber);
     first.count=1;
     for (int i = 0; i < line.length(); i++)
